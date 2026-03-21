@@ -32,12 +32,15 @@ def split_lane(lane):
 
 
 # importing csv
+print("📥 reading CSV...")
 raw_loadsmart_database = pd.read_csv("../data/raw/2026_data_challenge_ae_data.csv")
+print(f"✅ CSV read with {len(raw_loadsmart_database)} rows.")
 
 
 # In[4]:
 
 
+print("🧹 cleaning data...")
 # remove duplicated column
 raw_loadsmart_database = raw_loadsmart_database.drop(columns=['has_mobile_app_tracking.1'])
 
@@ -56,12 +59,13 @@ raw_loadsmart_database["book_date"] = pd.to_datetime(raw_loadsmart_database["boo
 raw_loadsmart_database["quote_date"] = pd.to_datetime(raw_loadsmart_database["quote_date"])
 raw_loadsmart_database["pickup_appointment_time"] = pd.to_datetime(raw_loadsmart_database["pickup_appointment_time"])
 raw_loadsmart_database["delivery_appointment_time"] = pd.to_datetime(raw_loadsmart_database["delivery_appointment_time"])
-
+print("✅ dates converted.")
 
 # apply the split_lane function to each row, turning the dictionary into columns
 raw_loadsmart_database[['pickup_city','pickup_state','delivery_city','delivery_state']] = \
 raw_loadsmart_database['lane'].apply(split_lane).apply(pd.Series)
 raw_loadsmart_database = raw_loadsmart_database.drop(columns=['lane'])
+print("✅ lane column splited.")
 
 
 # In[5]:
@@ -69,4 +73,5 @@ raw_loadsmart_database = raw_loadsmart_database.drop(columns=['lane'])
 
 # exporting csv
 raw_loadsmart_database.to_csv("../dbt_project/seeds/loadsmart_database.csv", index=False)
+print("✅ cleaned data exported to CSV as a Seed for dbt.")
 

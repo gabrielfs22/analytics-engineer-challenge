@@ -26,10 +26,10 @@ models:
       - name: shipper_name
         description: "The name of the shipper"
   
-  - name: dim_city
+  - name: dim_location
     description: "A dimension table for cities"
     columns:
-      - name: city_id
+      - name: location_id
         description: "The primary key for this table, generated as an MD5 hash of the city name and state name"
         data_tests:
           - unique
@@ -55,12 +55,12 @@ models:
         description: "The foreign key to the dim_carrier table"
         data_tests:
           - not_null
-      # - name: origin_city_id
-      #   description: "The foreign key to the dim_city table for the origin city"
+      # - name: origin_location_id
+      #   description: "The foreign key to the dim_location table for the origin city"
       #   data_tests:
       #     - not_null
-      # - name: destination_city_id
-      #   description: "The foreign key to the dim_city table for the destination city"
+      # - name: destination_location_id
+      #   description: "The foreign key to the dim_location table for the destination city"
       #   data_tests:
       #     - not_null
       - name: load_date

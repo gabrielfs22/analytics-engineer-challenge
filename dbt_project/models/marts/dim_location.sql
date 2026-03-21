@@ -14,7 +14,7 @@ with
         order by 2, 1 
     )
 select
-    md5(concat(city_name, state_name)) as city_id,
+    md5(concat(city_name, state_name)) as location_id,
     city_name,
     state_name
 from source_data
