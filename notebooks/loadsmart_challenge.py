@@ -32,7 +32,7 @@ def split_lane(lane):
 
 
 # importing csv
-raw_loadsmart_database = pd.read_csv("../data/2026_data_challenge_ae_data.csv")
+raw_loadsmart_database = pd.read_csv("../data/raw/2026_data_challenge_ae_data.csv")
 
 
 # In[4]:
