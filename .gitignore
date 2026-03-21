@@ -16,8 +16,11 @@ logs/
 target/
 dbt_packages/
 
-# DuckDB
+#DuckDB
 *.duckdb
 
 # Mac
 .DS_Store
+
+# Other
+/tests
