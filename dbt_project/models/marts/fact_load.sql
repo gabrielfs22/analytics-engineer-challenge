@@ -13,8 +13,8 @@ with
 		select * from {{ ref('dim_shipper') }}
 	),
 	
-	dim_city as (
-		select * from {{ ref('dim_city') }}
+	dim_location as (
+		select * from {{ ref('dim_location') }}
 	)
 	
 
@@ -23,8 +23,8 @@ select
     loads.loadsmart_id,
     shipper.shipper_id,
     carrier.carrier_id,
-    pickup_city.city_id as pickup_city_id,
-    delivery_city.city_id as delivery_city_id,
+    pickup_city.location_id as pickup_location_id,
+    delivery_city.location_id as delivery_location_id,
     cast(loads.quote_date as datetime) as quote_date,
     cast(loads.book_date as datetime) as book_date,
     cast(loads.source_date as datetime) as source_date,
@@ -59,10 +59,10 @@ left join dim_carrier as carrier
 	on loads.carrier_name = carrier.carrier_name
 left join dim_shipper as shipper
 	on loads.shipper_name = shipper.shipper_name
-left join dim_city as pickup_city
+left join dim_location as pickup_city
 	on loads.pickup_state = pickup_city.state_name
 	and loads.pickup_city = pickup_city.city_name
-left join dim_city as delivery_city
+left join dim_location as delivery_city
 	on loads.delivery_state = delivery_city.state_name
 	and loads.delivery_city = delivery_city.city_name
 
