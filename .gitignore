@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# Poetry
+.poetry/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# dbt
+logs/
+target/
+dbt_packages/
+
+# DuckDB
+*.duckdb
+
+# Mac
+.DS_Store
