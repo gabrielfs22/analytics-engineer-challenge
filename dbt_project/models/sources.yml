@@ -1,0 +1,7 @@
+version: 1
+
+sources:
+  - name: raw
+    tables:
+      - name: loadsmart_database
+        description: "This table contains information about loads from Loadsmart."

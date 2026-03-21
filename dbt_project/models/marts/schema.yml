@@ -1,0 +1,67 @@
+
+version: 2
+
+models:
+  - name: dim_carrier
+    description: "A dimension table for carriers"
+    columns:
+      - name: carrier_id
+        description: "The primary key for this table, generated as an MD5 hash of the carrier name"
+        data_tests:
+          - unique
+          - not_null
+      - name: carrier_name
+        description: "The name of the carrier"
+      - name: vip_carrier
+        description: "A boolean indicating whether the carrier is a VIP carrier"
+
+  - name: dim_shipper
+    description: "A dimension table for shippers"
+    columns:
+      - name: shipper_id
+        description: "The primary key for this table, generated as an MD5 hash of the shipper name"
+        data_tests:
+          - unique
+          - not_null
+      - name: shipper_name
+        description: "The name of the shipper"
+  
+  - name: dim_city
+    description: "A dimension table for cities"
+    columns:
+      - name: city_id
+        description: "The primary key for this table, generated as an MD5 hash of the city name and state name"
+        data_tests:
+          - unique
+          - not_null
+      - name: city_name
+        description: "The name of the city"
+      - name: state_name
+        description: "The name of the state"
+
+  - name: fact_load
+    description: "A fact table for loads"
+    columns:
+      - name: loadsmart_id
+        description: "The primary key for this table, generated as an MD5 hash of the load attributes"
+        data_tests:
+          - unique
+          - not_null
+      - name: shipper_id
+        description: "The foreign key to the dim_shipper table"
+        data_tests:
+          - not_null
+      - name: carrier_id
+        description: "The foreign key to the dim_carrier table"
+        data_tests:
+          - not_null
+      # - name: origin_city_id
+      #   description: "The foreign key to the dim_city table for the origin city"
+      #   data_tests:
+      #     - not_null
+      # - name: destination_city_id
+      #   description: "The foreign key to the dim_city table for the destination city"
+      #   data_tests:
+      #     - not_null
+      - name: load_date
+        description: "The date of the load"
