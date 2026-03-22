@@ -7,3 +7,4 @@ run:
 	- dbt test --project-dir dbt_project
 	jupyter nbconvert --execute --to python notebooks/export_last_month_delivery_loads.ipynb
 	jupyter nbconvert --execute --to python notebooks/send_csv_email.ipynb
+	jupyter nbconvert --execute --to python notebooks/send_csv_sftp.ipynb
