@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[35]:
 
 
 import paramiko
@@ -10,14 +10,10 @@ from datetime import date
 
 def send_csv_sftp(local_path, remote_path):
 
-    # host = os.getenv("SFTP_HOST")
-    # port = int(os.getenv("SFTP_PORT", 22))
-    # username = os.getenv("SFTP_USER")
-    # password = os.getenv("SFTP_PASS")
-    host = "localhost"
-    port = 2222
-    username = "user"
-    password = "password"
+    host = os.getenv("SFTP_HOST")
+    port = int(os.getenv("SFTP_PORT", 22))
+    username = os.getenv("SFTP_USER")
+    password = os.getenv("SFTP_PASSWORD")
 
 
     transport = paramiko.Transport((host,port))
@@ -33,7 +29,7 @@ def send_csv_sftp(local_path, remote_path):
     print(f"File {local_path} sent to {remote_path} via SFTP.")
 
 
-# In[2]:
+# In[36]:
 
 
 today = date.today().strftime("%Y-%m-%d")
