@@ -64,7 +64,7 @@ poetry env activate
 
 ### 5. Export Credentials
 
-# Windows
+**Windows**
 $env:EMAIL_USER="gfernandes2108@gmail.com"
 $env:EMAIL_PASS="gxyr ywbs vrla piyp"
 $env:SFTP_HOST="localhost"
@@ -72,7 +72,7 @@ $env:SFTP_USER="user"
 $env:SFTP_PORT="2222"
 $env:SFTP_PASSWORD="password"
 
-# Linux/ Mac
+**Linux/ Mac**
 export EMAIL_USER="gfernandes2108@gmail.com"
 export EMAIL_PASS="gxyr ywbs vrla piyp"
 export SFTP_HOST=localhost
@@ -88,6 +88,7 @@ Run the complete orchestration with a single command:
 ```bash
 make run
 ```
+
 
 This executes:
 1. Data cleaning, lane parsing and export a csv for dbt use as a seed (Python notebook)
@@ -149,18 +150,31 @@ analytics-engineer-challenge/
 ├── README.md                                    # This file
 ├── Makefile                                     # Pipeline orchestration
 ├── pyproject.toml                               # Python dependencies
-├── .env                                         # Environment variables template
+├── .gitignore                                   # Git ignore rules
+├── poetry.lock                                  # Poetry lock file
 ├── data/
 │   ├── raw/
 │   │   └── 2026_data_challenge_ae_data.csv     # Source data
+│   ├── warehouse/
+│   │   └── dev.duckdb                          # DuckDB database (created by dbt)
 │   └── exports/
-│       └── export_last_month_delivery_loads_*.csv
+│       └── export_last_month_delivery_loads_*.csv  # Exported CSVs (created automatically)
 ├── notebooks/
 │   ├── cleaning_raw_data.ipynb                # Data cleaning & lane parsing
-│   └── export_last_month_delivery_loads.ipynb   # CSV export script
+│   ├── cleaning_raw_data.py                   # Python version
+│   ├── export_last_month_delivery_loads.ipynb   # CSV export script
+│   ├── export_last_month_delivery_loads.py     # Python version
+│   ├── send_csv_email.ipynb                    # Email sending script
+│   ├── send_csv_email.py                       # Python version
+│   ├── send_csv_sftp.ipynb                     # SFTP sending script
+│   └── send_csv_sftp.py                        # Python version
 ├── dbt_project/
 │   ├── dbt_project.yml                          # dbt configuration
 │   ├── profiles.yml                             # DuckDB profile
+│   ├── README.md                                # dbt project README
+│   ├── logs/                                    # dbt logs
+│   ├── macros/
+│   │   └── custom_schema.sql                    # Custom macros
 │   ├── models/
 │   │   ├── marts/
 │   │   │   ├── dim_carrier.sql                  # Carrier dimension
@@ -169,8 +183,10 @@ analytics-engineer-challenge/
 │   │   │   ├── fact_load.sql                    # Load facts table
 │   │   │   └── schema.yml                       # Data documentation
 │   │   └── sources.yml                          # Source definitions
-│   └── seeds/
-│       └── loadsmart_database.csv               # Cleaned data seed
+│   ├── seeds/
+│   │   └── loadsmart_database.csv               # Cleaned data seed
+│   ├── target/                                  # dbt compiled/run artifacts
+│   └── tests/                                   # dbt tests
 └── src/
     └── analytics_engineer_challenge/
         └── __init__.py
@@ -203,11 +219,11 @@ analytics-engineer-challenge/
 3. **Cleaned Data Seed**: `dbt_project/seeds/loadsmart_database.csv`
    - Input data to dimensional models
 
-4. **Database**: `dbt_project/dev.duckdb`
+4. **Database**: `data/warehouse/dev.duckdb`
    - DuckDB database with all tables
 
 5. **Export CSV**: `data/exports/export_last_month_delivery_loads_YYYY-MM-DD.csv`
-   - Last month's delivery loads with all required columns
+   - Last month's delivery loads with all required columns (folder created automatically)
 
 ## Testing the Solution
 
