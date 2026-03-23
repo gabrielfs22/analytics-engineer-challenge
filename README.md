@@ -17,8 +17,8 @@ This project builds a dimensional data model (Star Schema) from logistics load d
 ### ✅ 1. Dimensional Modeling & dbt Skills
 - Ingested raw logistics data and built a Star Schema dimensional model
 - Created dimension tables: `dim_carrier`, `dim_shipper`, `dim_location`
-- Built fact table: `fact_load` with 34 metrics and key relationships
-- Implemented data quality tests (unique, not_null constraints)
+- Built fact table: `fact_load` with key relationships
+- Implemented data quality tests (unique, not_null)
 - Used DuckDB as the data warehouse
 
 ### ✅ 2. Python Skills
@@ -34,18 +34,11 @@ This project builds a dimensional data model (Star Schema) from logistics load d
 - Reads from the dimensional model
 - Automatically timestamped exports
 
-## Prerequisites
-
-- Python 3.11 or higher
-- Poetry (Python package manager)
-- Git
-- ~500MB disk space for DuckDB database
-
 ## Installation & Setup
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone <https://github.com/gabrielfs22/analytics-engineer-challenge.git>
 cd analytics-engineer-challenge
 ```
 
@@ -75,17 +68,19 @@ make run
 ```
 
 This executes:
-1. Data cleaning and lane parsing (Python notebook)
-2. Seed raw data to dbt
-3. Build dimensional models
-4. Run data quality tests
-5. Export analytics CSV
+1. Data cleaning, lane parsing and export a csv for dbt use as a seed (Python notebook)
+2. Seed raw data to dbt (dbt)
+3. Build dimensional models (dbt)
+4. Run data quality tests (dbt)
+5. Export analytics report CSV (Python notebook)
+6. Send the csv report by email (Python notebook)
+7. Send the csv report by sftp (Python notebook)
 
 ### Option B: Step-by-Step Execution
 
 #### Step 1: Clean Raw Data & Parse Lane Column
 ```bash
-jupyter nbconvert --execute --to python notebooks/loadsmart_challenge.ipynb
+jupyter nbconvert --execute --to python notebooks/cleaning_raw_data.ipynb
 ```
 This notebook:
 - Reads raw CSV data
@@ -111,10 +106,20 @@ dbt test
 
 #### Step 5: Export Last Month's Delivery Loads
 ```bash
-jupyter nbconvert --execute --to python ../notebooks/export_last_month_delivery_loads.ipynb
+jupyter nbconvert --execute --to python notebooks/export_last_month_delivery_loads.ipynb
 ```
 
 Exported CSV will be saved to: `data/exports/export_last_month_delivery_loads_YYYY-MM-DD.csv`
+
+#### Step 6: Send the CSV report by Email
+```bash
+jupyter nbconvert --execute --to python notebooks/send_csv_email.ipynb
+```
+
+#### Step 6: Send the CSV report by SFTP
+```bash
+jupyter nbconvert --execute --to python notebooks/send_csv_sftp.ipynb
+```
 
 ## Project Structure
 
@@ -130,7 +135,7 @@ analytics-engineer-challenge/
 │   └── exports/
 │       └── export_last_month_delivery_loads_*.csv
 ├── notebooks/
-│   ├── loadsmart_challenge.ipynb                # Data cleaning & lane parsing
+│   ├── cleaning_raw_data.ipynb                # Data cleaning & lane parsing
 │   └── export_last_month_delivery_loads.ipynb   # CSV export script
 ├── dbt_project/
 │   ├── dbt_project.yml                          # dbt configuration
@@ -155,7 +160,6 @@ analytics-engineer-challenge/
 ### Star Schema Overview
 
 **Fact Table: `fact_load`**
-- 34 columns including load dates, prices, performance metrics
 - Foreign keys: carrier_id, shipper_id, pickup_location_id, delivery_location_id
 - Primary key: loadsmart_id
 
@@ -175,12 +179,6 @@ analytics-engineer-challenge/
 
 ### Generated Outputs
 
-1. **dbt Compiled Models**: `dbt_project/target/compiled/`
-   - SQL generated from dbt templates
-
-2. **dbt Run Results**: `dbt_project/target/run/`
-   - SQL executed during dbt run
-
 3. **Cleaned Data Seed**: `dbt_project/seeds/loadsmart_database.csv`
    - Input data to dimensional models
 
@@ -191,12 +189,6 @@ analytics-engineer-challenge/
    - Last month's delivery loads with all required columns
 
 ## Testing the Solution
-
-### Validate Data Quality
-```bash
-cd dbt_project
-dbt test
-```
 
 Expected output: All tests should pass, confirming:
 - Primary keys are unique
@@ -209,12 +201,6 @@ cd dbt_project
 dbt docs generate
 dbt docs serve  # Opens documentation in browser
 ```
-
-### Verify Export CSV
-The exported CSV should contain:
-- All loadsmart_ids delivered in the last available month
-- 9 required columns: loadsmart_id, shipper_name, delivery_date, pickup_city, pickup_state, delivery_city, delivery_state, book_price, carrier_name
-- No null values in required columns
 
 ## Dependencies
 
@@ -234,38 +220,6 @@ All dependencies are managed via Poetry. Key packages:
 ```bash
 poetry shell
 ```
-
-### Issue: DuckDB database locked
-**Solution**: Remove the database and re-run:
-```bash
-rm dbt_project/dev.duckdb
-make run
-```
-
-### Issue: Jupyter notebook won't execute
-**Solution**: Ensure you're in the Poetry shell and install jupyter:
-```bash
-poetry shell
-pip install --upgrade jupyter nbconvert
-```
-
-### Issue: Import errors in notebooks
-**Solution**: Verify all dependencies are installed:
-```bash
-poetry install --no-root
-```
-
-## Future Enhancements
-
-- [ ] Add data visualization report (Power BI/Superset)
-- [ ] Implement SFTP export functionality
-- [ ] Add email notification on pipeline completion
-- [ ] Expand to incremental dbt models
-- [ ] Create scheduled pipeline (Airflow/Prefect)
-
-## Author
-
-Gabriel Fernandes
 
 ## Notes
 
