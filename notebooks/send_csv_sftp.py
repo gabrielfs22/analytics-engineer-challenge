@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[35]:
+# In[1]:
 
 
 import paramiko
@@ -29,7 +29,7 @@ def send_csv_sftp(local_path, remote_path):
     print(f"File {local_path} sent to {remote_path} via SFTP.")
 
 
-# In[36]:
+# In[2]:
 
 
 today = date.today().strftime("%Y-%m-%d")
