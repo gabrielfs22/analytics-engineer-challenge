@@ -80,7 +80,7 @@ This executes:
 
 #### Step 1: Clean Raw Data & Parse Lane Column
 ```bash
-jupyter nbconvert --execute --to python notebooks/cleaning_raw_data.ipynb
+poetry run jupyter nbconvert --execute --to python notebooks/cleaning_raw_data.ipynb
 ```
 This notebook:
 - Reads raw CSV data
@@ -90,35 +90,34 @@ This notebook:
 
 #### Step 2: Seed Data to dbt
 ```bash
-cd dbt_project
-dbt seed
+poetry run dbt seed --project-dir dbt_project --profiles-dir dbt_project
 ```
 
 #### Step 3: Build Dimensional Models
 ```bash
-dbt run --full-refresh
+poetry run dbt run --full-refresh --project-dir dbt_project --profiles-dir dbt_project
 ```
 
 #### Step 4: Run Data Quality Tests
 ```bash
-dbt test
+poetry run dbt test --project-dir dbt_project --profiles-dir dbt_project
 ```
 
 #### Step 5: Export Last Month's Delivery Loads
 ```bash
-jupyter nbconvert --execute --to python notebooks/export_last_month_delivery_loads.ipynb
+poetry run jupyter nbconvert --execute --to python notebooks/export_last_month_delivery_loads.ipynb
 ```
 
 Exported CSV will be saved to: `data/exports/export_last_month_delivery_loads_YYYY-MM-DD.csv`
 
 #### Step 6: Send the CSV report by Email
 ```bash
-jupyter nbconvert --execute --to python notebooks/send_csv_email.ipynb
+poetry run jupyter nbconvert --execute --to python notebooks/send_csv_email.ipynb
 ```
 
 #### Step 6: Send the CSV report by SFTP
 ```bash
-jupyter nbconvert --execute --to python notebooks/send_csv_sftp.ipynb
+poetry run jupyter nbconvert --execute --to python notebooks/send_csv_sftp.ipynb
 ```
 
 ## Project Structure
