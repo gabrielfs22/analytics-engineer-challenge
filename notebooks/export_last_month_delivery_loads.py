@@ -13,7 +13,7 @@ from datetime import date
 
 
 today = date.today().strftime("%Y-%m-%d")
-conn = duckdb.connect("../dbt_project/dev.duckdb", read_only=True)
+conn = duckdb.connect("../data/warehouse/dev.duckdb", read_only=True)
 
 
 # In[3]:
