@@ -57,10 +57,32 @@ poetry install
 ```bash
 poetry shell
 ```
+or
+```bash
+poetry env activate
+```
+
+### 5. Export Credentials
+
+# Windows
+$env:EMAIL_USER="***REMOVED***"
+$env:EMAIL_PASS="***REMOVED*** ywbs vrla piyp"
+$env:SFTP_HOST="***REMOVED***"
+$env:SFTP_USER="***REMOVED***"
+$env:SFTP_PORT="2222"
+$env:SFTP_PASSWORD="***REMOVED***"
+
+# Linux/ Mac
+export EMAIL_USER="***REMOVED***"
+export EMAIL_PASS="***REMOVED*** ywbs vrla piyp"
+export SFTP_HOST=***REMOVED***
+export SFTP_USER=***REMOVED***
+export SFTP_PORT=2222
+export SFTP_PASSWORD=***REMOVED***
 
 ## Running the Project
 
-### Option A: Full Pipeline (Recommended)
+### Option A: Full Pipeline (Linux/Mac)
 Run the complete orchestration with a single command:
 
 ```bash
@@ -76,7 +98,7 @@ This executes:
 6. Send the csv report by email (Python notebook)
 7. Send the csv report by sftp (Python notebook)
 
-### Option B: Step-by-Step Execution
+### Option B: Step-by-Step Execution (Windows)
 
 #### Step 1: Clean Raw Data & Parse Lane Column
 ```bash
