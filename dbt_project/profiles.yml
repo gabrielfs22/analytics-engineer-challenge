@@ -2,12 +2,12 @@ dbt_project:
   outputs:
     dev:
       type: duckdb
-      path: dev.duckdb
+      path: ./data/warehouse/dev.duckdb
       threads: 1
 
     prod:
       type: duckdb
-      path: prod.duckdb
+      path: ./data/warehouse/prod.duckdb
       threads: 4
 
   target: dev
