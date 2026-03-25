@@ -209,8 +209,8 @@ analytics-engineer-challenge/
 - Primary key: loadsmart_id
 
 **Dimensions:**
-- `dim_carrier`: Carrier name and VIP status (10+ carriers)
-- `dim_shipper`: Shipper names (3 main shippers)
+- `dim_carrier`: Carrier name and VIP status
+- `dim_shipper`: Shipper names
 - `dim_location`: City-state combinations for pickup/delivery points
 
 ### Key Metrics in Fact Table
@@ -270,14 +270,6 @@ All dependencies are managed via Poetry. Key packages:
 - **jupyter** (1.1.1+): Notebooks
 - **paramiko** (4.0.0+): SFTP capabilities
 - **python-dotenv** (1.2.2+): Environment variable management
-
-## Troubleshooting
-
-### Issue: `dbt command not found`
-**Solution**: Ensure Poetry shell is activated:
-```bash
-poetry shell
-```
 
 ## Notes
 
