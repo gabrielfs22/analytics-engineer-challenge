@@ -1,8 +1,8 @@
 {{ config(materialized='table') }}
 
 with
-	raw_loads as (
-		select * from {{ source('raw', 'loadsmart_database') }}
+	staging_loads as (
+		select * from {{ source('staging', 'loadsmart_database') }}
 	),
 
 	dim_carrier as (
@@ -57,7 +57,7 @@ select
     loads.pickup_state,
     loads.delivery_city,
     loads.delivery_state
-from raw_loads as loads
+from staging_loads as loads
 left join dim_carrier as carrier
 	on loads.carrier_name = carrier.carrier_name
 left join dim_shipper as shipper
