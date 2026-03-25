@@ -50,7 +50,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 ### 3. Install Dependencies
 ```bash
-poetry install
+poetry install --no-root
 ```
 
 ### 4. Activate Virtual Environment
