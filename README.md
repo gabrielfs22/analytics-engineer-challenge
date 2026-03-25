@@ -9,7 +9,7 @@ This project builds a dimensional data model (Star Schema) from logistics load d
 - **Dimensional Modeling**: Star schema with facts and dimensions
 - **Data Build Tool (dbt)**: Data transformations and testing
 - **Python**: Data processing and CSV exports
-- **Orchestration**: Makefile-based pipeline execution
+- **Orchestration**: `run_pipeline.py`-based pipeline execution
 - **Data Validation**: dbt tests on key metrics
 
 ## Challenge Requirements Completed
@@ -94,7 +94,7 @@ Note: These are example values. Replace with your actual credentials for email a
 Run the complete orchestration with a single command:
 
 ```bash
-make run
+python run_pipeline.py
 ```
 
 
@@ -156,7 +156,7 @@ poetry run jupyter nbconvert --execute --to python notebooks/send_csv_sftp.ipynb
 ```
 analytics-engineer-challenge/
 ├── README.md                                    # This file
-├── Makefile                                     # Pipeline orchestration
+├── run_pipeline.py                              # Pipeline orchestration
 ├── pyproject.toml                               # Python dependencies
 ├── .gitignore                                   # Git ignore rules
 ├── poetry.lock                                  # Poetry lock file
