@@ -24,3 +24,4 @@ dbt_packages/
 
 # Other
 /tests
+/parquet
