@@ -2,7 +2,7 @@
 
 with
 	staging_loads as (
-		select * from {{ source('staging', 'loadsmart_database') }}
+		select * from {{ ref('stg_loadsmart_database') }}
 	),
 
 	dim_carrier as (
