@@ -65,7 +65,8 @@ poetry env activate
 ### 5. Export Credentials
 
 **Windows**
-$env:EMAIL_USER="gfernandes2108@gmail.com"
+$env:EMAIL_SENDER="gfernandes2108@gmail.com"
+$env:EMAIL_RECEIVER="ghab12@hotmail.com"
 $env:EMAIL_PASS="gxyr ywbs vrla piyp"
 $env:SFTP_HOST="localhost"
 $env:SFTP_USER="user"
@@ -73,7 +74,8 @@ $env:SFTP_PORT="2222"
 $env:SFTP_PASSWORD="password"
 
 **Linux/ Mac**
-export EMAIL_USER="gfernandes2108@gmail.com"
+export EMAIL_SENDER="gfernandes2108@gmail.com"
+export EMAIL_RECEIVER="ghab12@hotmail.com"
 export EMAIL_PASS="gxyr ywbs vrla piyp"
 export SFTP_HOST=localhost
 export SFTP_USER=user

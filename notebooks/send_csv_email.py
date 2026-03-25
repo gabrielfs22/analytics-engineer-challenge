@@ -16,8 +16,8 @@ import os
 def send_csv_email(file_path, subject, receiver, body):
     msg = EmailMessage()
     msg['Subject'] = subject
-    msg['From'] = os.getenv("EMAIL_USER")#"gfernandes2108@gmail.com"
-    msg['To'] = receiver
+    msg['From'] = os.getenv("EMAIL_SENDER")#"gfernandes2108@gmail.com"
+    msg['To'] = os.getenv("EMAIL_RECEIVER") #  receiver #
 
     # email body
     msg.add_alternative(body, subtype='html')
@@ -34,7 +34,7 @@ def send_csv_email(file_path, subject, receiver, body):
     #send email
     with smtplib.SMTP('smtp.gmail.com', 587) as server:
         server.starttls()
-        server.login(os.getenv("EMAIL_USER"),os.getenv("EMAIL_PASS"))
+        server.login(os.getenv("EMAIL_SENDER"),os.getenv("EMAIL_PASS"))
         server.send_message(msg)
 
     print("Email sent!")
