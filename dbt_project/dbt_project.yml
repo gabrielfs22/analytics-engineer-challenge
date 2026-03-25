@@ -39,4 +39,4 @@ models:
 
 seeds:
   dbt_project:
-   +schema: raw
+   +schema: staging
