@@ -5,12 +5,12 @@ with
         select distinct
             pickup_city as city_name,
             pickup_state as state_name
-        from {{ source('staging', 'loadsmart_database') }}
+        from {{ ref('stg_loadsmart_database') }}
         UNION
         select distinct
             delivery_city as city_name,
             delivery_state as state_name
-        from {{ source('staging', 'loadsmart_database') }}
+        from {{ ref('stg_loadsmart_database') }}
         order by 2, 1 
     )
 select
