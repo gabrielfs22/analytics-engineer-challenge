@@ -34,6 +34,10 @@ This project builds a dimensional data model (Star Schema) from logistics load d
 - Reads from the dimensional model
 - Automatically timestamped exports
 
+#### c) Email and SFTP Sending Functions
+- Created functions to send CSV files via email and SFTP
+- Functions implemented in dedicated Jupyter Notebooks for better organization
+
 ## Installation & Setup
 
 ### 1. Clone the Repository
@@ -81,6 +85,8 @@ export SFTP_HOST=localhost
 export SFTP_USER=user
 export SFTP_PORT=2222
 export SFTP_PASSWORD=password
+
+Note: These are example values. Replace with your actual credentials for email and SFTP services.
 
 ## Running the Project
 
@@ -213,6 +219,19 @@ analytics-engineer-challenge/
 - **Performance**: carrier_on_time_pickup, carrier_on_time_delivery, carrier_rating
 - **Tracking**: has_mobile_app_tracking, has_macropoint_tracking, has_edi_tracking
 - **Operations**: contracted_load, load_booked_autonomously, load_sourced_autonomously
+
+## Data Visualization
+
+### Power BI Dashboard
+- **File**: `power_bi/loads_dashboard.pbix`
+- **Purpose**: Proof of concept demonstrating how the dimensional model enables data analysis and reporting
+- **Key Visualizations**:
+  - Financial results by month (Total Revenue, Total Cost, Total PnL)
+  - Results per mileage by month (Revenue per Mileage, Cost per Mileage, PnL per Mileage)
+  - PnL and margin by month (Total PnL and % Margin)
+  - Margin per equipment type by month (DRV, FBE, RFR)
+  - Operational performance (Avg Pickup to Delivery Days, % Pickups On Time, % Deliveries On Time, % Cancellation, Avg Book to Pickup Days)
+- **Data Source**: Connects directly to the DuckDB warehouse for real-time analysis
 
 ## Output Files
 
